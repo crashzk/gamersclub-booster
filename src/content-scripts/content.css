@@ -333,7 +333,8 @@ input[type="range"].filterKdr::-ms-tooltip {
   transition: opacity 0.25s cubic-bezier(0, 0.47, 0.34, 1), transform 0.25s cubic-bezier(0, 0.47, 0.34, 1);
 }
 
-.LobbyRoom:hover .gcbooster_lupa {
+.LobbyRoom:hover .gcbooster_lupa,
+.sala-lineup-players .gcbooster_lupa {
   opacity: 1;
   pointer-events: initial;
   transform: translateY(0);
@@ -446,4 +447,22 @@ input[type="range"].filterKdr::-ms-tooltip {
     box-shadow: #ff00006b 0px 0px 9px;
     border-color: #c61010;
     font-size: 20px;
+}
+
+
+.sidebar-desafios-team .sala-lineup-players .is-prime {
+    width: 32px;
+    height: 32px;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%) scale(1.15);
+    top: unset;
+}
+
+.sidebar-desafios-team .sala-lineup-players .sala-lineup-player {
+    height: 140px;
+}
+
+.sidebar-desafios-team .sala-lineup-players .sala-lineup-player .sala-lineup-imagem #gcbooster_kdr {
+    margin-bottom: 8px !important;
 }
