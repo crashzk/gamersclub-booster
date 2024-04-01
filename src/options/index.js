@@ -28,6 +28,7 @@ function iniciarPaginaOpcoes() {
   popularAudioOptions();
   popularServerWebHookOptions();
   selecionarSons();
+  atualizarValorVolume();
   adicionarListenersSons();
   loadWebhook();
   adicionarListenerTraducao();
@@ -280,10 +281,28 @@ function selecionarSons() {
   chrome.storage.sync.get( null, response => {
     if ( !response ) { return false; }
     for ( const config of configValues ) {
-      document.getElementById( config ).value = response[config];
+      document.getElementById( config ).value = response[config] || '';
+    }
+
+    updateReadySoundInputsDisable();
+  } );
+}
+
+function atualizarValorVolume() {
+  chrome.storage.sync.get( [ 'volume' ], function ( data ) {
+    if ( data.volume ) {
+      document.getElementById( 'volumeValue' ).innerText = `${data.volume}%`;
     }
   } );
 }
+
+function updateReadySoundInputsDisable() {
+  const isDefaultSound = !document.getElementById( 'somReady' ).value;
+
+  document.getElementById( 'testarSomReady' ).disabled = isDefaultSound;
+  document.getElementById( 'volume' ).disabled = isDefaultSound;
+}
+
 
 function adicionarListenersSons() {
   for ( const config of configValues ) {
@@ -307,6 +326,13 @@ function adicionarListenersSons() {
     audio.volume = document.getElementById( 'volume' ).value / 100;
     audio.play();
   } );
+
+  document.getElementById( 'volume' ).addEventListener( 'input', function () {
+    const volume = document.getElementById( 'volume' ).value;
+    document.getElementById( 'volumeValue' ).innerText = `${volume}%`;
+  } );
+
+  document.getElementById( 'somReady' ).addEventListener( 'input', updateReadySoundInputsDisable );
 }
 
 function abrirPagina( pagina ) {
