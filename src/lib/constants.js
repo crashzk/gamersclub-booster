@@ -50,6 +50,8 @@ export const features = [
   'autoCopiarIp',
   'autoAceitarReady',
   'autoFixarMenuLobby',
+  'ocultarSugestaoDeLobbies',
+  'ocultarNotificacaoComplete',
   'autoDarkMode',
   'autoCompactMode',
   'autoConcordarTermosRanked',

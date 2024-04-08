@@ -12,6 +12,9 @@ import { mostrarKdr, mostrarKdrSala, mostrarKdrRanked } from './mostrarKdr';
 // import { adicionarFiltroKdr } from './filtrarKdr';
 import { infoLobby, infoChallenge } from './infoLobby';
 
+import { ocultarSugestaoDeLobbies } from './ocultarSugestaoDeLobbies';
+import { ocultarNotificacaoComplete } from './ocultarNotificacaoComplete';
+
 
 chrome.storage.sync.get( null, function ( _result ) {
   if ( window.location.pathname.includes( 'partida' ) || window.location.pathname.includes( '/match/' ) ) {
@@ -39,6 +42,12 @@ const initLobby = async () => {
   criarObserver( '#lobbies-wrapper', infoLobby );
   criarObserver( '#challengeList', infoChallenge );
   criarObserver( '#challengeList', mostrarKdr );
+
+  // Esconde a sugestão de lobbies para entrar
+  ocultarSugestaoDeLobbies();
+
+  //  Oculta as notificações de complete
+  ocultarNotificacaoComplete();
 
   // Clicar automáticamente no Ready, temporário.
   autoAceitarReadySetInterval();
