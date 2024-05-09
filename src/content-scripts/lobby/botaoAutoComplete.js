@@ -32,8 +32,11 @@ export async function adicionarBotaoAutoComplete() {
     const $autoCompleteBtn = $( '#btn-auto-complete' );
 
     $autoCompleteBtn.parent().css( {
-      'grid-template-columns': '1fr 1fr',
+      'grid-template-columns': 'repeat(3, 1fr)',
       'display': 'grid'
+    } );
+    $autoCompleteBtn.parent().parent().css( {
+      'padding': '12px 12px'
     } );
 
     $autoCompleteBtn.on( 'click', async function () {
@@ -56,16 +59,12 @@ export async function adicionarBotaoAutoComplete() {
       if ( btnAlreadyExists || !isReadyToInsert ) { return; }
 
       $( '#lobby-actions-create-lobby-button' ).parent()
-        .prepend( $( '<button/>', {
+        .append( $( '<button/>', {
           'id': 'btn-auto-complete',
-          'class': 'WasdButton WasdButton--primary WasdButton--lg WasdButton--block',
+          'class': 'WasdButton WasdButton--primary WasdButton--lg WasdButton--block draw-orange btn-visible',
           'type': 'button',
           'text': completarPartidaText
-        } )
-        );
-
-      // cria uma pequena animação para o botão não aparecer de forma brusca
-      setTimeout( () => { $( '#btn-auto-complete' ).addClass( 'btn-visible' ); }, 100 );
+        } ) );
 
       addListeners();
     } );
